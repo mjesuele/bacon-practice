@@ -16,7 +16,7 @@
   $('#click-me')
     .asEventStream('click')
     .map(R.prop('timeStamp'))
-    .map(ts => moment(ts).calendar())
+    .map(ts => moment(ts).calendar().toLowerCase())
     .map(timeStr => `Hey! You clicked the button ${timeStr}`)
     .map(msg => $('<div>').text(msg))
     .onValue($msg => $('#click-logger').append($msg));

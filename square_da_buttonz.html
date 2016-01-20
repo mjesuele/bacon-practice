@@ -58,10 +58,10 @@
 <body>
   <div id="container">
     <div id="inner">
-      <button id="4">4</button>
-      <button id="17">17</button>
-      <button id="22">22</button>
-      <button id="144">144</button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
       <div id="message">Click a number to square it</div>
     </div>
   </div>
@@ -70,9 +70,15 @@
   <script src="bower_components/ramda/dist/ramda.min.js"></script>
   <script>
 
+  const randomInt = (max) => Math.floor(Math.random() * max);
+
+  $(() =>
+    $('button').each(function() { this.textContent = randomInt(100) })
+  );
+
   $('button')
     .asEventStream('click')
-    .map(R.path(['target', 'id']))
+    .map(R.path(['target', 'textContent']))
     .map(x => x * x)
     .map(squaredNum => `The square of the number you clicked is ${squaredNum}`)
     .onValue(msg => $('#message').text(msg));
