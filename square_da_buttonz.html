@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQUARE DEM BUTTONZ</title>
+  <style>
+
+  body,
+  html,
+  #container {
+    height: 100%;
+    margin: 0;
+  }
+
+  #container {
+    background-color: cornflowerblue;
+    color: #fefefe;
+    font-family: 'DejaVu Sans', sans-serif;
+    position: relative;
+    text-align: center;
+  }
+
+  #inner {
+    bottom: 0;
+    height: 10em;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    padding: 1em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+  }
+
+  button {
+    background-color: #1e75e8;
+    border: 1px solid darkblue;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1em;
+    height: 2em;
+    margin: 0 .5em;
+    padding: .33em;
+    width: 3em;
+  }
+
+  button:hover {
+    background-color: #2e85f8;
+  }
+
+  #message {
+    margin-top: 1.33em;
+  }
+
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="inner">
+      <button id="4">4</button>
+      <button id="17">17</button>
+      <button id="22">22</button>
+      <button id="144">144</button>
+      <div id="message">Click a number to square it</div>
+    </div>
+  </div>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/moment/min/moment.min.js"></script>
+  <script src="bower_components/bacon/dist/Bacon.min.js"></script>
+  <script src="bower_components/ramda/dist/ramda.min.js"></script>
+  <script>
+
+  $('button')
+    .asEventStream('click')
+    .map(R.path(['target', 'id']))
+    .map(x => x * x)
+    .map(squaredNum => `The square of the number you clicked is ${squaredNum}`)
+    .onValue(msg => $('#message').text(msg));
+
+  </script>
+</body>
+</html>
