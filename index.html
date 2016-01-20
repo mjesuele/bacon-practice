@@ -19,10 +19,7 @@
     .map(ts => moment(ts).calendar())
     .map(timeStr => `Hey! You clicked the button ${timeStr}`)
     .map(msg => $('<div>').text(msg))
-    .onValue($msg => {
-      console.log('click!', $msg);
-      $('#click-logger').append($msg);
-    });
+    .onValue($msg => $('#click-logger').append($msg));
 
   </script>
 </body>
