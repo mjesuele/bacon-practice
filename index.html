@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bacon.js Practice</title>
+</head>
+<body>
+  <button id="click-me">Here's a button to click</button>
+  <div id="click-logger"></div>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/moment/min/moment.min.js"></script>
+  <script src="bower_components/bacon/dist/Bacon.min.js"></script>
+  <script src="bower_components/ramda/dist/ramda.min.js"></script>
+  <script>
+
+  $('#click-me').asEventStream('click').map(R.prop('timeStamp')).subscribe(timestamp => {
+    console.log('click!');
+    const time = moment(timestamp);
+    const msg = `Hey! You clicked the button at ${time}`;
+    const $msg = $('<div>').text(msg)
+    $('#click-logger').append($msg);
+  });
+
+  </script>
+</body>
+</html>
