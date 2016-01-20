@@ -72,8 +72,8 @@
 
   const randomInt = (max) => Math.floor(Math.random() * max);
 
-  $(() =>
-    $('button').each(function() { this.textContent = randomInt(100) })
+  R.forEach(btn => btn.textContent = randomInt(100),
+    document.getElementsByTagName('button')
   );
 
   $('button')
