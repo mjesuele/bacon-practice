@@ -13,13 +13,16 @@
   <script src="bower_components/ramda/dist/ramda.min.js"></script>
   <script>
 
-  $('#click-me').asEventStream('click').map(R.prop('timeStamp')).subscribe(timestamp => {
-    console.log('click!');
-    const time = moment(timestamp);
-    const msg = `Hey! You clicked the button at ${time}`;
-    const $msg = $('<div>').text(msg)
-    $('#click-logger').append($msg);
-  });
+  $('#click-me')
+    .asEventStream('click')
+    .map(R.prop('timeStamp'))
+    .map(ts => moment(ts).calendar())
+    .map(timeStr => `Hey! You clicked the button ${timeStr}`)
+    .map(msg => $('<div>').text(msg))
+    .onValue($msg => {
+      console.log('click!', $msg);
+      $('#click-logger').append($msg);
+    });
 
   </script>
 </body>
